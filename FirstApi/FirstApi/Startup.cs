@@ -16,6 +16,8 @@ namespace FirstApi
 {
     public class Startup
     {
+        private const string _version = "v1";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,21 +28,25 @@ namespace FirstApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers()
+                    // Remove null property to ouput
+                    .AddJsonOptions(options =>
+                    {
+                        options.JsonSerializerOptions.IgnoreNullValues = true;
+                    });
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo
+                c.SwaggerDoc(_version, new OpenApiInfo
                 {
-                    Version = "v1",
+                    Version = _version,
                     Title = "First API",
-                    Description = "First try on C# API",
+                    Description = "First try on Swagger C# API",
                     //TermsOfService = new Uri("https://example.com/terms"),
                     Contact = new OpenApiContact
                     {
                         Name = "Dammouz",
-                        //Email = "mail@mail",
                         Url = new Uri("https://github.com/Dammouz/"),
                     },
                     License = new OpenApiLicense
@@ -62,7 +68,7 @@ namespace FirstApi
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "FirstAPI V1");
+                c.SwaggerEndpoint($"/swagger/{_version}/swagger.json", $"FirstAPI {_version}");
                 //c.RoutePrefix = "FirtApi";
             });
 
@@ -71,6 +77,7 @@ namespace FirstApi
                 app.UseDeveloperExceptionPage();
             }
 
+            // Use HTTPS
             //app.UseHttpsRedirection();
 
             app.UseRouting();

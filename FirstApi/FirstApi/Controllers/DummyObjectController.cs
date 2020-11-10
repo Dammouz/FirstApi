@@ -22,7 +22,6 @@ namespace FirstApi.Controllers
         {
             _logger.LogWarning($"Inside {nameof(DummyObjectController)}-{nameof(Get)}");
 
-            // Must not happen
             if (numberOfElement < 1)
             {
                 return new List<IDummyObject>
