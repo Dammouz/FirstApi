@@ -35,7 +35,7 @@ namespace FirstApi
                 {
                     Version = "v1",
                     Title = "First API",
-                    Description = "First try on C#A PI",
+                    Description = "First try on C# API",
                     //TermsOfService = new Uri("https://example.com/terms"),
                     Contact = new OpenApiContact
                     {

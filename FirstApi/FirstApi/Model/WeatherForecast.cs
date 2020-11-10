@@ -1,8 +1,8 @@
 using System;
 
-namespace FirstApi
+namespace FirstApi.Model
 {
-    public class WeatherForecast
+    internal class WeatherForecast : IWeatherForecast
     {
         public DateTime Date { get; set; }
 
